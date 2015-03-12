@@ -66,18 +66,18 @@
 					<div class="row 150%">
 						<div class="4u 12u$(medium)">
 							<section class="box">
-								  <li><a href="/Ruso/Clock.html">Clock</a></li>
-								  <li><a href="/Ruso/Server.html">Clock</a></li>
+								  <li><a href="Clock.html">Clock</a></li>
+								  <li><a href="Server.html">Game</a></li>
 							</section>
 						</div>
 						<div class="4u 12u$(medium)">
 							<section class="box">
-								<li><a href="/Ruso/ZoomWord.html">Zoom Word</a></li>
+								<li><a href="ZoomWord.html">Zoom Word</a></li>
 							</section>
 						</div>
 						<div class="4u$ 12u$(medium)">
 							<section class="box">
-								<li><a href="/Ruso/itoh.html">ITOH</a></li>
+								<li><a href="itoh.html">ITOH</a></li>
 							</section>
 						</div>
 					</div>
