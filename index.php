@@ -42,6 +42,16 @@
 				 -webkit-border-radius: 100px;
 				 -moz-border-radius: 100px;
 			}
+			.img-circular2 {
+				 width: 100px;
+				 height: 100px;
+				 background-image: url('http://cs.annauniv.edu/images/other/BLVelammal.jpg');
+				 background-size: cover;
+				 display: block;
+				 border-radius: 100px;
+				 -webkit-border-radius: 100px;
+				 -moz-border-radius: 100px;
+			}
 			ul {
     			list-style: square url("images/java.jpg");
 			}
@@ -108,6 +118,10 @@
 								<div class="4u 12u$(medium)">
 									<div class="img-circular"></div><br>
 									<a href="https://www.facebook.com/sakthipvmj">Sakthivel S</a>
+								</div>
+								<div class="4u 12u$(medium)">
+									<div class="img-circular2"></div><br>
+									<a href="#">Mentor - Dr. B.L. Velammal</a>
 								</div>
 						</div>
 				</div>
