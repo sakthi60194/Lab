@@ -121,7 +121,7 @@
 								</div>
 								<div class="4u 12u$(medium)">
 									<div class="img-circular2"></div><br>
-									<a href="#"><b>Mentor</b> - Dr. B.L. Velammal</a>
+									<a href="#">Mentor - Dr. B.L. Velammal</a>
 								</div>
 						</div>
 				</div>
