@@ -32,6 +32,16 @@
 				 -webkit-border-radius: 100px;
 				 -moz-border-radius: 100px;
 			}
+			.img-circular1 {
+				 width: 100px;
+				 height: 100px;
+				 background-image: url('images/sachin.jpg');
+				 background-size: cover;
+				 display: block;
+				 border-radius: 100px;
+				 -webkit-border-radius: 100px;
+				 -moz-border-radius: 100px;
+			}
 			ul {
     			list-style: square url("images/java.jpg");
 			}
@@ -61,23 +71,28 @@
 				<div class="container">
 					<header class="major">
 						<h2>Computer Graphics Programs</h2>
-						<p>Lorem ipsum dolor sit amet, delectus consequatur, similique quia!</p>
+						<p></p>
 					</header>
 					<div class="row 150%">
 						<div class="4u 12u$(medium)">
 							<section class="box">
 								  <li><a href="Clock.html">Clock</a></li>
-								  <li><a href="Server.html">Game</a></li>
+								  <li><a href="Bressenham.html">Bressenham</a></li>
+								  <li><a href="Dda.html">Dda</a></li>
 							</section>
 						</div>
 						<div class="4u 12u$(medium)">
 							<section class="box">
 								<li><a href="ZoomWord.html">Zoom Word</a></li>
+								<li><a href="Led.html">Seven Segment</a></li>
+								<li><a href="LiangBarsky.html">LiangBarsky</a></li>
 							</section>
 						</div>
 						<div class="4u$ 12u$(medium)">
 							<section class="box">
 								<li><a href="itoh.html">ITOH</a></li>
+								<li><a href="Cube3d.html">Cube3d</a></li>
+								<li><a href="Reflection.html">Reflection of a Triangle</a></li>
 							</section>
 						</div>
 					</div>
@@ -87,7 +102,7 @@
 				<div class="container">
 							<div class="row 150%">
 								<div class="4u 12u$(medium)">
-									<div class="img-circular"></div><br>
+									<div class="img-circular1"></div><br>
 									<a href="https://www.facebook.com/sachin.saikrishna">Sachin Sai Krishna M</a>	
 								</div>
 								<div class="4u 12u$(medium)">

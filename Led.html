@@ -1,0 +1,173 @@
+<HTML>
+
+<head>
+	<title>Clock</title>
+	<script type="text/javascript">
+	function openCode() {
+		document.getElementById("code").className="coder1";
+	}
+	function demo() {
+		document.getElementById("codeq").className="coder1";
+	}
+	</script>
+	<style type="text/css">
+	.coder {
+		display: none;
+	}
+	.coder1 {
+		display: block;
+	}
+	.coder2 {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="openCode()">Show Code</button>
+	<button onclick="demo()">Demo</button>
+	<div id="code" class="coder">
+		<pre>
+		<code>
+				/*
+				 * To change this license header, choose License Headers in Project Properties.
+				 * To change this template file, choose Tools | Templates
+				 * and open the template in the editor.
+				 */
+
+				package cg;
+
+				import java.applet.Applet;
+				import java.awt.Color;
+				import java.awt.Graphics;
+				import java.util.logging.Level;
+				import java.util.logging.Logger;
+
+				/**
+				 *
+				 * @author sakthi
+				 */
+				public class Led extends Applet{
+				    int[] a = {50,100,150,100};
+				    int[] b = {150,100,150,150};
+				    int[] c = {150,150,150,200};
+				    int[] d = {150,200,50,200};
+				    int[] e = {50,200,50,150};
+				    int[] f = {50,150,50,100};
+				    int[] G = {50,150,150,150};
+				    
+				    public void drawSevenSegment(Graphics g){
+				        g.setColor(Color.yellow);
+				        Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(e[0], e[1], e[2], e[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				          
+				          
+				     
+				           
+				    }
+				    public void paint(Graphics g){
+				        drawSevenSegment(g);
+				       
+				        for(int i=0 ; i<=9 ; i++){
+				             g.setColor(Color.red);
+				            switch(i){
+				                case 0:
+				                    Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(e[0], e[1], e[2], e[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				                    break;
+				                case 1:
+				                    Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				                    break;
+				                case 2:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(e[0], e[1], e[2], e[3], g);
+				         
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 3:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 4:
+				                     
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 5:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 6:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(e[0], e[1], e[2], e[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 7:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         
+				                    break;
+				                case 8:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(e[0], e[1], e[2], e[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				                    break;
+				                case 9:
+				                     Dda.drawLine(a[0], a[1], a[2], a[3], g);
+				         Dda.drawLine(b[0], b[1], b[2], b[3], g);
+				         Dda.drawLine(c[0], c[1], c[2], c[3], g);
+				         Dda.drawLine(d[0], d[1], d[2], d[3], g);
+				          Dda.drawLine(f[0], f[1], f[2], f[3], g);
+				            Dda.drawLine(G[0], G[1], G[2], G[3], g);
+				            }
+				            try {
+				                
+				                Thread.sleep(1000);
+				                drawSevenSegment(g);
+				                Thread.sleep(1000);
+				            } catch (InterruptedException ex) {
+				                Logger.getLogger(Led.class.getName()).log(Level.SEVERE, null, ex);
+				            }
+				        }
+				        
+				    }
+				}
+
+		 </code>
+		 </pre>
+	</div>
+	<div class="coder2" id="codeq">
+		<APPLET codebase="classes" code="cg/Led.class" width="100%" height="100%"></APPLET>
+	</div>
+
+</body>
+</HTML>

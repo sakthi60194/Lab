@@ -1,27 +1,215 @@
 <HTML>
-<HEAD>
-   <TITLE>ITOH</TITLE>
-</HEAD>
-<BODY>
+<head>
+	<title>ITOH</title>
+	<script type="text/javascript">
+	function openCode() {
+		document.getElementById("code").className="coder1";
+	}
+	function demo() {
+		document.getElementById("codeq").className="coder1";
+	}
+	</script>
+	<style type="text/css">
+	.coder {
+		display: none;
+	}
+	.coder1 {
+		display: block;
+	}
+	.coder2 {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="openCode()">Show Code</button>
+	<button onclick="demo()">Demo</button>
+	<div id="code" class="coder">
+		<pre>
+		<code>
+			/*
+			 * To change this license header, choose License Headers in Project Properties.
+			 * To change this template file, choose Tools | Templates
+			 * and open the template in the editor.
+			 */
 
-<!--
-*** GENERATED applet HTML launcher - DO NOT EDIT IN 'BUILD' FOLDER ***
+			package cg;
 
-If you need to modify this HTML launcher file (e.g., to add applet parameters), 
-copy it to where your applet class is found in the SRC folder. If you do this, 
-the IDE will use it when you run or debug the applet.
 
-Tip: To exclude an HTML launcher from the JAR file, use exclusion filters in 
-the Packaging page in the Project Properties dialog.
 
-For more information see the online help.
--->
+			import java.applet.*;
+			import java.awt.*;
+			import java.awt.event.*;
+			import java.awt.Point;
+			/**
+			 *
+			 * @author pavi
+			 */
+			public class itoh extends Applet implements MouseListener, MouseMotionListener {
 
-<H3><HR WIDTH="100%">ITOH<HR WIDTH="100%"></H3>
+			    float[][] p1, p2, p3, p4, p5, p6, shx;
+			    float x1, y1, x2, y2;
+			    java.awt.Point pointStart = null;
+			    java.awt.Point pointEnd = null;
 
-<P>
-<APPLET codebase="classes" code="cg/itoh.class" width="100%" height="100%"></APPLET>
-</P>
+			    public itoh() {
+			        p1 = new float[][]{{x1}, {y1}, {1}};  //top horizontal of I
+			        p2 = new float[][]{{x2}, {y2}, {1}};
+			        p3 = new float[][]{{x1}, {y1 + 100}, {1}};  //bottom horizontal of I
+			        p4 = new float[][]{{x2}, {y2 + 100}, {1}};
+			        p5 = new float[][]{{x1 + 25}, {y1}, {1}};  //middle vertical of I
+			        p6 = new float[][]{{x1 + 25}, {y2}, {1}};
+			        shx = new float[][]{{1, 1, 0}, {0, 1, 0}, {0, 0, 1}};     //shear x=1
+			    }
 
-</BODY>
+			    @Override
+			    public void init() {
+			        // Add the MouseListener to your applet 
+			        addMouseListener(this);
+			        addMouseMotionListener(this);
+			    }
+
+			    @Override
+			    public void paint(Graphics g) {
+			        //g.translate(50, 50);      //translate origin
+			        super.paint(g);
+			        if (pointStart != null) {
+			            g.setColor(Color.RED);
+			            x1 = (float) pointStart.x;
+			            y1 = (float) pointStart.y;
+			            x2 = (float) pointEnd.x;
+			            y2 = (float) pointEnd.y;
+			            g.drawLine((int) pointStart.x, (int) pointStart.y, (int) pointEnd.x, (int) pointEnd.y);
+			            p1[0][0] = x1;
+			            p1[1][0] = y1;
+			            p2[0][0] = x2;
+			            p2[1][0] = y2;
+			            p3[0][0] = x1;
+			            p3[1][0] = y1 + 100;
+			            p4[0][0] = x2;
+			            p4[1][0] = y2 + 100;
+			            p5[0][0] = (x1 + x2) / 2;
+			            p5[1][0] = (y1 + y2) / 2;
+			            p6[0][0] = (x1 + x2) / 2;
+			            p6[1][0] = p5[1][0] + 100;
+			        }
+
+			        g.setColor(Color.blue);     //Original I
+			        g.drawLine((int) p1[0][0], (int) p1[1][0], (int) p2[0][0], (int) p2[1][0]);
+			        g.drawLine((int) p3[0][0], (int) p3[1][0], (int) p4[0][0], (int) p4[1][0]);
+			        g.drawLine((int) p5[0][0], (int) p5[1][0], (int) p6[0][0], (int) p6[1][0]);
+
+			        float[][] p11, p22, p33, p44, p55, p66;
+			        p11 = multiply(shx, p1);
+			        p22 = multiply(shx, p2);
+			        p33 = multiply(shx, p3);
+			        p44 = multiply(shx, p4);
+			        p55 = multiply(shx, p5);
+			        p66 = multiply(shx, p6);
+			        g.setColor(Color.MAGENTA);  //Sheared I
+			        g.drawLine((int) p11[0][0], (int) p11[1][0], (int) p22[0][0], (int) p22[1][0]);
+			        g.drawLine((int) p33[0][0], (int) p33[1][0], (int) p44[0][0], (int) p44[1][0]);
+			        g.drawLine((int) p55[0][0], (int) p55[1][0], (int) p66[0][0], (int) p66[1][0]);
+
+			        //ROTATE TO GET ITALIC 'H'
+
+			        //float[][] translate = new float[][]{{1, 0, -p22[0][0]}, {0, 1, -p22[1][0]}, {0, 0, 1}};
+			        double angle = Math.atan((p44[1][0] - p22[1][0]) / (p44[0][0] - p22[0][0]));
+			        float[][] rotmat = new float[][]{{(float) Math.cos(angle), (float) Math.sin(angle), 0}, {-(float) Math.sin(angle), (float) Math.cos(angle), 0}, {0, 0, 1}};
+			        //float[][] translateBack = new float[][]{{1, 0, p22[0][0]}, {0, 1, p22[1][0]}, {0, 0, 1}};
+			        //float[][] intermediate, finalm;
+			        //intermediate = multiply(translateBack, rotmat);
+			        //finalm = multiply(intermediate, translate);
+			        //finalm = multiply(translate, rotmat);
+
+			        float[][] fp1, fp2, fp3, fp4, fp5, fp6;
+			        fp1 = multiply(rotmat, p11);
+			        fp2 = multiply(rotmat, p22);
+			        fp3 = multiply(rotmat, p33);
+			        fp4 = multiply(rotmat, p44);
+			        fp5 = multiply(rotmat, p55);
+			        fp6 = multiply(rotmat, p66);
+			        g.setColor(Color.GREEN);    //Italic H
+			        g.translate(300, 300);
+			        g.drawLine((int) fp1[0][0], (int) fp1[1][0], (int) fp2[0][0], (int) fp2[1][0]);
+			        g.drawLine((int) fp3[0][0], (int) fp3[1][0], (int) fp4[0][0], (int) fp4[1][0]);
+			        g.drawLine((int) fp5[0][0], (int) fp5[1][0], (int) fp6[0][0], (int) fp6[1][0]);
+			        //Clipping H
+			        LiangBarsky l=new LiangBarsky();
+			        Point pt1 = new Point();
+			        Point pt2= new Point();
+			        pt1.x=(int) fp1[0][0];
+			        pt1.y=(int) fp1[1][0];
+			        pt2.x=(int) fp2[0][0];
+			        pt2.y=(int) fp2[1][0];
+			        l.Liang(pt1,pt2,g);
+			        pt1.x=(int) fp3[0][0];
+			        pt1.y=(int) fp3[1][0];
+			        pt2.x=(int) fp4[0][0];
+			        pt2.y=(int) fp4[1][0];
+			        l.Liang(pt1,pt2,g);
+			        pt1.x=(int) fp5[0][0];
+			        pt1.y=(int) fp5[1][0];
+			        pt2.x=(int) fp6[0][0];
+			        pt2.y=(int) fp6[1][0];
+			        l.Liang(pt1,pt2,g);
+			    }
+
+			    public static float[][] multiply(float[][] a, float[][] b) {
+			        int rowsInA = a.length;
+			        int columnsInA = a[0].length; // same as rows in B
+			        int columnsInB = b[0].length;
+			        float[][] c = new float[rowsInA][columnsInB];
+			        for (int i = 0; i < rowsInA; i++) {
+			            for (int j = 0; j < columnsInB; j++) {
+			                for (int k = 0; k < columnsInA; k++) {
+			                    c[i][j] = c[i][j] + a[i][k] * b[k][j];
+			                }
+			            }
+			        }
+			        return c;
+			    }
+
+			    @Override
+			    public void mouseClicked(MouseEvent e) {
+			    }
+
+			    @Override
+			    public void mousePressed(MouseEvent e) {
+			        pointStart = e.getPoint();
+			    }
+
+			    @Override
+			    public void mouseReleased(MouseEvent e) {
+			        pointStart = null;
+			    }
+
+			    @Override
+			    public void mouseEntered(MouseEvent e) {
+			    }
+
+			    @Override
+			    public void mouseExited(MouseEvent e) {
+			    }
+
+			    @Override
+			    public void mouseDragged(MouseEvent e) {
+			        pointEnd = e.getPoint();
+			        repaint();
+			    }
+
+			    @Override
+			    public void mouseMoved(MouseEvent e) {
+			        pointEnd = e.getPoint();
+			    }
+			}
+
+		 </code>
+		 </pre>
+	</div>
+	<div class="coder2" id="codeq">
+		<APPLET codebase="classes" code="cg/itoh.class" width="100%" height="100%"></APPLET>
+	</div>
+
+</body>
 </HTML>

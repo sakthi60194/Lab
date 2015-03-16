@@ -1,27 +1,136 @@
 <HTML>
-<HEAD>
-   <TITLE>Zoom Word</TITLE>
-</HEAD>
-<BODY>
 
-<!--
-*** GENERATED applet HTML launcher - DO NOT EDIT IN 'BUILD' FOLDER ***
+<head>
+	<title>Clock</title>
+	<script type="text/javascript">
+	function openCode() {
+		document.getElementById("code").className="coder1";
+	}
+	function demo() {
+		document.getElementById("codeq").className="coder1";
+	}
+	</script>
+	<style type="text/css">
+	.coder {
+		display: none;
+	}
+	.coder1 {
+		display: block;
+	}
+	.coder2 {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="openCode()">Show Code</button>
+	<button onclick="demo()">Demo</button>
+	<div id="code" class="coder">
+		<pre>
+		<code>
+				/*
+				 * To change this license header, choose License Headers in Project Properties.
+				 * To change this template file, choose Tools | Templates
+				 * and open the template in the editor.
+				 */
 
-If you need to modify this HTML launcher file (e.g., to add applet parameters), 
-copy it to where your applet class is found in the SRC folder. If you do this, 
-the IDE will use it when you run or debug the applet.
+				package cg;
 
-Tip: To exclude an HTML launcher from the JAR file, use exclusion filters in 
-the Packaging page in the Project Properties dialog.
+				import java.applet.Applet;
+				import java.awt.Color;
+				import java.awt.Font;
+				import java.awt.Graphics;
+				import java.awt.event.MouseEvent;
+				import java.awt.event.MouseListener;
+				import java.awt.image.BufferedImage;
+				import static cg.ReflectWord.reflect;
+				import static cg.Reflection.genMatrix;
+				import static cg.Reflection.mult_matrix;
+				import java.awt.Button;
+				import java.awt.event.ActionEvent;
+				import java.awt.event.ActionListener;
 
-For more information see the online help.
--->
+				/**
+				 *
+				 * @author Nandu Vinodan
+				 * 
+				 * 
+				 */
+				public class ZoomWord extends Applet implements MouseListener,ActionListener{
+				    Graphics g2;
+				   static int size = 10 ;
+				   static int count = 1;
+				   Button b,b1;
+				   public ZoomWord()
+				   {
+				       b=new Button("ZOOM IN");
+				      b1=new Button("ZOOM OUT");
+				      
+				      b.setLocation(0,0);
+				      b1.setLocation(20,0);
+				      add(b);
+				      add(b1);
+				      
+				      b.addActionListener(this);
+				      b1.addActionListener(this);
+				   }
+				   public void paint(Graphics g){
+				       int size = 0;
+				       g2=g;
+				      writeWord();
+				      
+				     addMouseListener(this);
+				     }
+				  
+				    private void writeWord() {
+				        g2.setFont(new Font("TimesRoman",Font.PLAIN,size*count));
+				        g2.drawString("Hello World", 150, 150);
+				    }
+				    
+				    @Override
+				    public void mouseClicked(MouseEvent e) {
+				  
+				    }
+				    public void actionPerformed(ActionEvent e) {
+				       // System.out.println("hey");
+				       if(e.getActionCommand()=="ZOOM IN"){
+				         //  System.out.println("hello");
+				           count++;
+				            repaint();
+				       }
+				       else
+				       {
+				           count--;
+				           repaint();
+				       }
+				    }
 
-<H3><HR WIDTH="100%">Zoom Word<HR WIDTH="100%"></H3>
+				    @Override
+				    public void mousePressed(MouseEvent e) {
+				        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				    }
 
-<P>
-<APPLET codebase="classes" code="cg/ZoomWord.class" width="100%"></APPLET>
-</P>
+				    @Override
+				    public void mouseReleased(MouseEvent e) {
+				        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				    }
 
-</BODY>
+				    @Override
+				    public void mouseEntered(MouseEvent e) {
+				        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				    }
+
+				    @Override
+				    public void mouseExited(MouseEvent e) {
+				       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				    }
+				}
+		 </code>
+		 </pre>
+	</div>
+	<div class="coder2" id="codeq">
+		<APPLET codebase="classes" code="cg/ZoomWord.class" width="100%" height="100%"></APPLET>
+	</div>
+
+</body>
 </HTML>

@@ -1,0 +1,77 @@
+
+package mypack;
+
+
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+
+
+public class Cube3d extends Applet{
+     double x1=100,y1=300,x2=150,y2=325,dif=25;
+     
+     double width=50;
+    public void paint(Graphics g){
+        int i;
+        double w=x2,x=y2,y=x2+50,z=y2+dif;
+        g.setColor(Color.red);
+      
+        Cubes(x1,y1,x2,y2,g);
+        g.setColor(Color.BLACK);
+        Cubes(x1,y1-width,x2,y2-width,g);
+           g.setColor(Color.PINK);
+        Cubes(x2,y1-width,x2+50,y2-width,g);
+          g.setColor(Color.YELLOW);
+        Cubes(x2,y1,x2+50,y2,g);
+        g.setColor(Color.RED);
+       
+        Cubes(w,x,y,z,g);
+        Cubes(w,y2-width,y,z-width,g);
+        Cubes(y,y2,y+50,z,g);
+        
+        g.setColor(Color.GREEN);
+        Cubes(y+100,y2-width,y+150,z-width,g);
+        
+    }
+    void Cubes(double x1,double y1,double x2,double y2,Graphics g){
+         double x3=x1,y3=y1,x4=x2,y4=y2;
+         
+         int i;
+        for(i=0;i<2;i++){
+        DDA(x1,y1,x2,y2,g);
+        DDA(x1,y1,x1,y1-width,g);
+        DDA(x2,y2,x2,y2-width,g);
+        DDA(x1,y1-width,x2,y2-width,g);
+        if(i==1) {
+            DDA(x3,y3,x1,y1,g);
+            DDA(x4,y4,x2,y2,g);
+            DDA(x3,y3-width,x1,y1-width,g);
+            DDA(x4,y4-width,x2,y2-width,g);
+        }
+        x1=x2;
+       // y1=y1-100;
+        x2=x2+50;
+        //y2=y1;
+        }
+    }
+    void DDA(double x1,double y1,double x2, double y2,Graphics g){
+         double dx,dy,steps,x,y,xc,yc;
+        //double x1=100,y1=100,x2=200,y2=100;
+        dx=x2-x1;
+        dy=y2-y1;
+        if(Math.abs(dx)>Math.abs(dy)){
+            steps=Math.abs(dx);
+        }
+        else steps=Math.abs(dy);
+        xc=(dx/steps);
+        yc=(dy/steps);
+        x=x1;
+        y=y1;
+        for(int k=0;k<steps;k++){
+            x=x+xc;
+            y=y+yc;
+            g.drawOval((int)x, (int)y, 5, 5);
+        }
+    }
+}
+

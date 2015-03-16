@@ -1,29 +1,127 @@
 <HTML>
-<HEAD>
-   <TITLE>Clock</TITLE>
-</HEAD>
-<BODY>
 
-<!--
-*** GENERATED applet HTML launcher - DO NOT EDIT IN 'BUILD' FOLDER ***
+<head>
+	<title>Clock</title>
+	<script type="text/javascript">
+	function openCode() {
+		document.getElementById("code").className="coder1";
+	}
+	function demo() {
+		document.getElementById("codeq").className="coder1";
+	}
+	</script>
+	<style type="text/css">
+	.coder {
+		display: none;
+	}
+	.coder1 {
+		display: block;
+	}
+	.coder2 {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="openCode()">Show Code</button>
+	<button onclick="demo()">Demo</button>
+	<div id="code" class="coder">
+		<pre>
+		<code>
+			import java.applet.Applet;
+			import java.awt.Color;
+			import java.awt.Graphics;
 
-If you need to modify this HTML launcher file (e.g., to add applet parameters), 
-copy it to where your applet class is found in the SRC folder. If you do this, 
-the IDE will use it when you run or debug the applet.
+			/**
+			 *
+			 * @author sakthi
+			 */
+			public class clock1 extends Applet {
 
-Tip: To exclude an HTML launcher from the JAR file, use exclusion filters in 
-the Packaging page in the Project Properties dialog.
+			    float secondsSine, secondsCosine, minutesSine, minutesCosine, hoursSine, hoursCosine, x1, y1, x2, y2, x3, y3, x4, y4;
+			    float[][] center;
+			    float[][] seconds;
+			    float[][] secondsRotationMatrix;
+			    float[][] minutes;
+			    float[][] minutesRotationMatrix;
+			    float[][] hours;
+			    float[][] hoursRotationMatrix;
+			    int s,m,h;
+			    
+			    public clock1() {
+			        secondsSine = (float) Math.sin((Math.PI / 30));    //6 degrees per second
+			        secondsCosine = (float) Math.cos((Math.PI / 30));
+			        minutesSine = (float) Math.sin((Math.PI / (30*60)));    //0.1 degrees per second
+			        minutesCosine = (float) Math.cos((Math.PI / (30*60)));
+			        hoursSine = (float) Math.sin((Math.PI / (30*720)));    //0.5 degrees per minute
+			        hoursCosine = (float) Math.cos((Math.PI / (30*720)));
+			        x1 = 0;
+			        y1 = 0;
+			        x2 = 0;
+			        y2 = -100;  //seconds hand length:100
+			        x3 = 0;
+			        y3 = -100;  //minutes hand length:100
+			        x4 = 0;
+			        y4 = -75;   //hour hands length:75
 
-For more information see the online help.
--->
+			        center = new float[][]{{x1}, {y1}, {1}};    //center
+			        seconds = new float[][]{{x2}, {y2}, {1}};    //seconds hand
+			        minutes = new float[][]{{x3}, {y3}, {1}};    //minutes hand
+			        hours = new float[][]{{x4}, {y4}, {1}};    //hours hand
 
-<H3><HR WIDTH="100%">Clock<HR WIDTH="100%"></H3>
+			        secondsRotationMatrix = new float[][]{{secondsCosine, -secondsSine, 0}, {secondsSine, secondsCosine, 0}, {0, 0, 1}};
+			        minutesRotationMatrix = new float[][]{{minutesCosine, -minutesSine, 0}, {minutesSine, minutesCosine, 0}, {0, 0, 1}};
+			        hoursRotationMatrix = new float[][]{{hoursCosine, -hoursSine, 0}, {hoursSine, hoursCosine, 0}, {0, 0, 1}};
+			    }
 
-<P>
-<APPLET codebase="classes" code="cg/Clock.class" width="100%" height="100%"></APPLET>
-</P>
+			    @Override
+			    public void paint(Graphics g) {
+			        System.out.println("Hours:"+h+" Minutes:"+m+" Seconds:"+s);
+			        g.drawString("Hours:"+h+" Minutes:"+m+" Seconds:"+s,450,450);
+			        g.translate(200, 200);      //translate origin to show full clock
+			        seconds = multiplyMatrices(secondsRotationMatrix, seconds);    //rotate seconds hand
+			        s=(s+1)%60;
+			        minutes = multiplyMatrices(minutesRotationMatrix, minutes);    //rotate minutes hand
+			        if(s==0)
+			            m=(m+1)%60;
+			        hours = multiplyMatrices(hoursRotationMatrix, hours);    //rotate hours hand
+			        g.drawOval(-100, -100, 200, 200);   //draw clock boundary
+			        
 
+			        g.drawLine((int) center[0][0], (int) center[1][0], (int) seconds[0][0], (int) seconds[1][0]);   //draw seconds hand
+			        
+			        g.drawLine((int) center[0][0], (int) center[1][0], (int) minutes[0][0], (int) minutes[1][0]);   //draw minutes hand
+			        
+			        g.drawLine((int) center[0][0], (int) center[1][0], (int) hours[0][0], (int) hours[1][0]);   //draw hours hand
+			        try {
+			            Thread.sleep(1000);     //one second
+			        } catch (InterruptedException ex) {
+			            System.out.println(ex);
+			        }
+			        repaint();
+			    }
 
+			    public static float[][] multiplyMatrices(float[][] a, float[][] b) {
+			        int rowsInA = a.length;
+			        int columnsInA = a[0].length; // same as rows in B
+			        int columnsInB = b[0].length;
+			        float[][] c = new float[rowsInA][columnsInB];
+			        for (int i = 0; i < rowsInA; i++) {
+			            for (int j = 0; j < columnsInB; j++) {
+			                for (int k = 0; k < columnsInA; k++) {
+			                    c[i][j] = c[i][j] + a[i][k] * b[k][j];
+			                }
+			            }
+			        }
+			        return c;
+			    }
+			}
+		 </code>
+		 </pre>
+	</div>
+	<div class="coder2" id="codeq">
+		<APPLET codebase="classes" code="cg/Clock.class" width="100%" height="100%"></APPLET>
+	</div>
 
-</BODY>
+</body>
 </HTML>

@@ -1,0 +1,111 @@
+<HTML>
+
+<head>
+	<title>Clock</title>
+	<script type="text/javascript">
+	function openCode() {
+		document.getElementById("code").className="coder1";
+	}
+	function demo() {
+		document.getElementById("codeq").className="coder1";
+	}
+	</script>
+	<style type="text/css">
+	.coder {
+		display: none;
+	}
+	.coder1 {
+		display: block;
+	}
+	.coder2 {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button onclick="openCode()">Show Code</button>
+	<button onclick="demo()">Demo</button>
+	<div id="code" class="coder">
+		<pre>
+		<code>
+
+package mypack;
+
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+
+public class Bressenham extends Applet{
+    double x1,y1,x2,y2 ;
+   public Bressenham(){
+       
+        
+      
+    String input1 = JOptionPane.showInputDialog(null, "Enter x1:", "Dialog for Input", JOptionPane.INFORMATION_MESSAGE);
+    String input2 = JOptionPane.showInputDialog(null, "Enter y1:", "Dialog for Input", JOptionPane.INFORMATION_MESSAGE);
+    String input3 = JOptionPane.showInputDialog(null, "Enter x2:", "Dialog for Input", JOptionPane.INFORMATION_MESSAGE);
+    String input4 = JOptionPane.showInputDialog(null, "Enter y2:", "Dialog for Input", JOptionPane.INFORMATION_MESSAGE);
+        x1=Double.parseDouble(input1);
+        y1=Double.parseDouble(input2);
+        x2=Double.parseDouble(input3);
+        y2=Double.parseDouble(input4);
+        
+   }
+   
+    public void paint(Graphics g){
+        g.fillOval((int)x1, (int)y1, 5 , 5);
+        double dx = x2-x1;
+        double dy = y2-y1;
+        double p;
+        double x=x1,y=y1;
+        if(dy < dx){
+            double twody = 2*dy;
+            double twodyminusdx = 2*(dy-dx);
+            p = twody - dx;
+            for(int i=0 ; i<dx ; i++){
+                x++;
+                if(p < 0)
+                {
+                    g.fillOval((int)x, (int)y, 5, 5);
+                       p += twody;
+                }
+                else{
+                    y++;
+                    g.fillOval((int)x, (int)y, 5, 5);
+                    p += twodyminusdx;
+                }
+            }
+        }
+        else{
+             double twodx = 2*dx;
+            double twodxminusdy = 2*(dx-dy);
+            p = twodx - dy;
+            for(int i=0 ; i<dy ; i++){
+                x++;
+                if(p < 0)
+                {
+                    g.fillOval((int)x, (int)y, 5, 5);
+                       p += twodx;
+                }
+                else{
+                    y++;
+                    g.fillOval((int)x, (int)y, 5, 5);
+                    p += twodxminusdy;
+                }
+            }
+        }
+    
+    }
+}
+
+		 </code>
+		 </pre>
+	</div>
+	<div class="coder2" id="codeq">
+		<APPLET codebase="classes" code="mypack/Bressenham.class" width="100%" height="100%"></APPLET>
+	</div>
+
+</body>
+</HTML>
