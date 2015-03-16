@@ -57,7 +57,7 @@
 				</nav>
 			</header>
 			<section id="banner">
-				<h2>There are lot programs which is done using applet are available here</h2>
+				<h2>CS 8611 - Computer Graphics and Multimedia Laboratory</h2>
 				<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
 				<ul class="actions">
 					<li>
